@@ -30,6 +30,7 @@ jobs:
       - name: Run tests
         run: xvfb-run mvn test
       - name: Generate allure report
+        if: always()
         run: allure generate target/allure-results -o target/allure-report --clean --single-file
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4

@@ -4,6 +4,7 @@ import com.microsoft.playwright.FrameLocator;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.WaitForSelectorState;
 import io.github.britka.driver.DriverHolder;
 import io.github.britka.models.CardData;
 import io.github.britka.pages.workout.MyWorkoutsPage;
@@ -31,18 +32,18 @@ public class SubscriptionPage {
         return this;
     }
 
-    public SubscriptionPage previous(){
+    public SubscriptionPage previous() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("PREVIOUS")).click();
         return this;
     }
 
-    public SubscriptionPage next(){
+    public SubscriptionPage next() {
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Next")).click();
         return this;
     }
 
     @Step("Enter card data: {cardData}")
-    public SubscriptionPage enterCardData(CardData cardData){
+    public SubscriptionPage enterCardData(CardData cardData) {
         FrameLocator frame = page.frameLocator("[name*=__privateStripeFrame]").first();
         frame.getByRole(AriaRole.TABLIST, new FrameLocator.GetByRoleOptions().setName("Payment Methods"))
                 .getByTestId("card")
@@ -54,8 +55,10 @@ public class SubscriptionPage {
         return this;
     }
 
-    public MyWorkoutsPage goToTrainings(){
-        page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("GO TO TRAININGS")).click();
+    public MyWorkoutsPage goToTrainings() {
+        Locator goToTrainings = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("GO TO TRAININGS"));
+        goToTrainings.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(60000));
+        goToTrainings.click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("START")).click();
         return new MyWorkoutsPage();
     }
