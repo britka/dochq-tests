@@ -42,9 +42,10 @@ jobs:
           sudo tar -zxvf allure-2.27.0.tgz -C /opt/
           sudo ln -s /opt/allure-2.27.0/bin/allure /usr/bin/allure
           allure --version
-          allure generate target/allure-results -o target/allure-reports --clear --single-file
+          allure generate target/allure-results -o target/allure-reports --clean --single-file
       - name: Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: assets-for-download
           path: target/allure-reports
