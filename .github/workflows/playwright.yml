@@ -24,7 +24,7 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - name: Install allure
-        run: apt install allure
+        run: apt -y install allure
       - name: Build & Install
         run: mvn -B install -D skipTests --no-transfer-progress
       - name: Run tests
