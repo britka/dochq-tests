@@ -9,7 +9,6 @@ import org.testng.annotations.Listeners;
  * Created by Serhii Bryt
  * 16.03.2024 20:06
  **/
-@Listeners(TestListener.class)
 public class BaseTest {
     protected Application application;
 

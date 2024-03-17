@@ -49,3 +49,11 @@ jobs:
         with:
           name: assets-for-download
           path: target/allure-reports
+          retention-days: 3
+      - name: Upload images
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: images
+          path: images
+          retention-days: 3

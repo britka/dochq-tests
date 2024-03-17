@@ -16,6 +16,9 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 
@@ -32,6 +35,11 @@ public class TestListener implements ITestListener, StepLifecycleListener, TestL
         if (result.getStatus() == Status.FAILED || result.getStatus() == Status.BROKEN) {
             byte[] screenshot = DriverHolder.getInstance().getPage()
                     .screenshot(new Page.ScreenshotOptions().setFullPage(true));
+            try {
+                Files.write(Path.of("images", "fail.png"), screenshot);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             Allure.addAttachment(result.getName(), new ByteArrayInputStream(screenshot));
         }
     }
