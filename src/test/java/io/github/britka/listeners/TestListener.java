@@ -1,6 +1,5 @@
 package io.github.britka.listeners;
 
-import com.codeborne.selenide.Selenide;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.ScreenshotType;
 import io.github.britka.driver.DriverHolder;
@@ -12,13 +11,11 @@ import io.qameta.allure.model.Status;
 import io.qameta.allure.model.StepResult;
 import io.qameta.allure.model.TestResult;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.OutputType;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.ByteArrayInputStream;
 
-import static com.codeborne.selenide.Selenide.screenshot;
 
 @Slf4j
 public class TestListener implements ITestListener, StepLifecycleListener, TestLifecycleListener {
@@ -26,12 +23,6 @@ public class TestListener implements ITestListener, StepLifecycleListener, TestL
     @Override
     public void onTestFailure(ITestResult result) {
         log.info("Test {} failed. Making screenshot...", result.getName());
-        makeScreenshot();
-    }
-
-    @Attachment(type = "image/png")
-    private byte[] makeScreenshot() {
-        return screenshot(OutputType.BYTES);
     }
 
     @Override
