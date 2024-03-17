@@ -11,12 +11,10 @@ permissions:
   checks: write
 jobs:
   playwright:
-    env:
-      DISPLAY: :0
     name: 'Playwright Tests'
     runs-on: ubuntu-latest
     container:
-      image: adaliya/jdk-17-maven-browsers:latest
+      image: mcr.microsoft.com/playwright/java:v1.42.0-jammy
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
@@ -25,8 +23,6 @@ jobs:
           java-version: '17'
       - name: Build & Install
         run: mvn -B install -D skipTests --no-transfer-progress
-      - name: Install Playwright
-        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
       - name: Run tests
         run: mvn test -D isHeadless=true
       - name: Publish Test Report
