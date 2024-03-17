@@ -56,7 +56,7 @@ public class SubscriptionPage {
     }
 
     public MyWorkoutsPage goToTrainings() {
-        Locator goToTrainings = page.getByRole(AriaRole.LINK, new Page.GetByRoleOptions().setName("GO TO TRAININGS"));
+        Locator goToTrainings = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("GO TO TRAININGS"));
         goToTrainings.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(60000));
         goToTrainings.click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("START")).click();
