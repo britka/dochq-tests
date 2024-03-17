@@ -21,6 +21,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Create .env file
+        uses: ozaytsev86/create-env-file@v1
+        with:
+          ENV_BASE_URL: ${{secrets.BASE_URL}}
       - name: Build & Install
         run: mvn -B install -D skipTests --no-transfer-progress
       - name: Run tests

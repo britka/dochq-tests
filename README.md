@@ -121,6 +121,11 @@ git clone https://github.com/britka/dochq-tests.git
 ```commandline
 cd dochq-tests
 ```
+* Create .env file using an example **.env.example** file. Add base url there 
+```properties
+BASE_URL=https://some.base.url
+```
+
 > [!NOTE]  
 > Java, maven, and allure report should be installed
 * By default, you can run tests
