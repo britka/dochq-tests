@@ -36,7 +36,7 @@ public class DriverHolder {
             getPlaywright();
             BrowserType browserType = getBrowserType();
             boolean isHeadless = Boolean.parseBoolean(System.getProperty("isHeadless", "false"));
-            context.set(browserType.launch(new BrowserType.LaunchOptions().setHeadless(isHeadless).setSlowMo(200)).newContext());
+            context.set(browserType.launch(new BrowserType.LaunchOptions().setHeadless(isHeadless)).newContext());
         }
         return context.get();
     }

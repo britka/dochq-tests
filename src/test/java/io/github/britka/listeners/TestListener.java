@@ -31,7 +31,7 @@ public class TestListener implements ITestListener, StepLifecycleListener, TestL
     public void beforeTestStop(TestResult result) {
         if (result.getStatus() == Status.FAILED || result.getStatus() == Status.BROKEN) {
             byte[] screenshot = DriverHolder.getInstance().getPage()
-                    .screenshot(new Page.ScreenshotOptions().setFullPage(true).setType(ScreenshotType.PNG));
+                    .screenshot(new Page.ScreenshotOptions().setFullPage(true));
             Allure.addAttachment(result.getName(), new ByteArrayInputStream(screenshot));
         }
     }
