@@ -36,8 +36,8 @@ public class TestListener implements ITestListener, StepLifecycleListener, TestL
             byte[] screenshot = DriverHolder.getInstance().getPage()
                     .screenshot(new Page.ScreenshotOptions().setFullPage(true));
             try {
-                Files.createDirectory(Path.of("images"));
-                Files.write(Path.of("images", "fail.png"), screenshot);
+                Files.createDirectory(Path.of("target/images"));
+                Files.write(Path.of("target/images", "fail.png"), screenshot);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
