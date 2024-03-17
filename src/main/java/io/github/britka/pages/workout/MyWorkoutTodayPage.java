@@ -1,6 +1,8 @@
 package io.github.britka.pages.workout;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.WaitForSelectorState;
 import io.github.britka.driver.DriverHolder;
 
 /**
@@ -11,6 +13,7 @@ public class MyWorkoutTodayPage {
     Page page = DriverHolder.getInstance().getPage();
 
     public boolean isWorkoutVisible() {
+        page.locator("#workout-iframe").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         return page.locator("#workout-iframe").isVisible();
     }
 

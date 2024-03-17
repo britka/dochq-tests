@@ -51,6 +51,8 @@ public class SubscriptionPage {
         frame.locator("#Field-numberInput").fill(cardData.getCardNumber());
         frame.locator("#Field-expiryInput").fill(cardData.getDate());
         frame.locator("#Field-cvcInput").fill(cardData.getCvv());
+        frame.locator("#Field-countryInput").selectOption("United States");
+        frame.locator("#Field-postalCodeInput").fill("12234");
         page.locator("#pay-now").click();
         return this;
     }
