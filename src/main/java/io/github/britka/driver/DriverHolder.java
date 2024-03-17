@@ -5,6 +5,8 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
+import java.util.Map;
+
 /**
  * Created by Serhii Bryt
  * 15.03.2024 10:40
@@ -26,7 +28,9 @@ public class DriverHolder {
 
     public Playwright getPlaywright() {
         if (playwright.get() == null) {
-            playwright.set(Playwright.create());
+            playwright.set(Playwright.create(new Playwright.CreateOptions().setEnv(
+                    Map.of("SELENIUM_REMOTE_URL", "http://localhost:4444/wd/hub")
+            )));
         }
         return playwright.get();
     }
