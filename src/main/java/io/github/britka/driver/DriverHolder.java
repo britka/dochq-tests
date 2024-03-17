@@ -28,9 +28,7 @@ public class DriverHolder {
 
     public Playwright getPlaywright() {
         if (playwright.get() == null) {
-            playwright.set(Playwright.create(new Playwright.CreateOptions().setEnv(
-                    Map.of("SELENIUM_REMOTE_URL", "http://localhost:4444/wd/hub")
-            )));
+            playwright.set(Playwright.create());
         }
         return playwright.get();
     }
