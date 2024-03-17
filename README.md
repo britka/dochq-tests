@@ -145,3 +145,5 @@ mvn clean test -D isHeadless=true
 
 ## Run test using github actions
 Please see [playwright.yaml](.github/workflows/playwright.yml)
+> [!NOTE]   
+> After tests finish running the job should upload allure-report as artifact
