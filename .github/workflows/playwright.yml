@@ -29,7 +29,9 @@ jobs:
       - name: Install Playwright
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
       - name: Run tests
-        run: xvfb-run mvn test
+        run: |
+          sudo apt -y install xvfb 
+          xvfb-run mvn test
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: success() || failure() # always run even if the previous step fails
@@ -40,6 +42,7 @@ jobs:
       - name: Allure install
         if: always()
         run: |
+          sudo apt -y install curl
           curl -o allure-2.27.0.tgz -OLs https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.27.0/allure-commandline-2.27.0.tgz
           sudo tar -zxvf allure-2.27.0.tgz -C /opt/
           sudo ln -s /opt/allure-2.27.0/bin/allure /usr/bin/allure
