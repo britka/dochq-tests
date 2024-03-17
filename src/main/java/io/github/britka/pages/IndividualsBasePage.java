@@ -10,7 +10,7 @@ import io.github.britka.pages.signin.SignInPage;
  **/
 public class IndividualsBasePage extends BasePage{
     public SignInPage signIn(){
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("SIGN IN1")).click();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("SIGN IN")).click();
         return new SignInPage();
     }
 }
