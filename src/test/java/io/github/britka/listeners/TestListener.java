@@ -7,6 +7,7 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.listener.StepLifecycleListener;
 import io.qameta.allure.listener.TestLifecycleListener;
+import io.qameta.allure.model.Parameter;
 import io.qameta.allure.model.Status;
 import io.qameta.allure.model.StepResult;
 import io.qameta.allure.model.TestResult;
@@ -15,6 +16,7 @@ import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.io.ByteArrayInputStream;
+import java.util.List;
 
 
 @Slf4j
@@ -35,8 +37,13 @@ public class TestListener implements ITestListener, StepLifecycleListener, TestL
     }
 
     @Override
-    public void beforeStepUpdate(StepResult result) {
-        log.info(result.getName());
-        StepLifecycleListener.super.beforeStepUpdate(result);
+    public void beforeStepStart(StepResult result) {
+        List<Parameter> parameters = result.getParameters();
+        StringBuilder parametersString = new StringBuilder();
+        parameters.forEach(parameter -> {
+            parametersString.append(parameter.getValue());
+            parametersString.append(", ");
+        });
+        log.info(" {}({})", result.getName(), parametersString);
     }
 }

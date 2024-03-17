@@ -35,3 +35,14 @@ jobs:
             check_name: 'Tests results'
             report_paths: '**/target/surefire-reports/TEST-*.xml'
             include_passed: true
+      - name: Allure install
+        if: always()
+        run: |
+          sudo apt update
+          sudo apt install allure
+          allure generate target/allure-results -o target/allure-reports --clear --single-file
+      - name: Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with:
+          name: assets-for-download
+          path: target/allure-reports
