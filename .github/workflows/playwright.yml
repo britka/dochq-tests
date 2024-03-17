@@ -23,18 +23,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: Install allure
-        run: |
-          apt-get update && apt-get install libfreetype6 fontconfig fonts-dejavu -y
-          apt -y install allure
       - name: Build & Install
         run: mvn -B install -D skipTests --no-transfer-progress
       - name: Run tests
         run: xvfb-run mvn test
-      - name: Generate allure report
-        if: always()
-        run: |
-          allure generate target/allure-results -o target/allure-report --clean --single-file
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: success() || failure() # always run even if the previous step fails
@@ -42,6 +34,11 @@ jobs:
             check_name: 'Tests results'
             report_paths: '**/target/surefire-reports/TEST-*.xml'
             include_passed: true
+      - name: Allure report
+        uses: afiore/action-allure-report@v0.1.0
+        with:
+          results-dir: 'target/allure-results'
+          report-dir: 'target/allure-report'
       - name: Upload allure results
         uses: actions/upload-artifact@v4
         with:
