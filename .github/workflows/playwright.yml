@@ -23,8 +23,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      - name: Install dependencies
-        run: npm ci
       - name: Install allure
         run: apt install allure
       - name: Build & Install
